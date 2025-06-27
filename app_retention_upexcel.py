@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 import scipy.stats as stats
 from scipy.stats import zscore
 
-st.title("Calculadora de Retención Semanal desde Excel")
+st.title("Calcule Retention UP Excel")
 
 # Subida del archivo Excel
 uploaded_file = st.file_uploader("Sube tu archivo Excel (.xlsx)", type=["xlsx"])
