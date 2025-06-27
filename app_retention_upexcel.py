@@ -12,7 +12,7 @@ st.title("Calcule Retention UP Excel")
 uploaded_file = st.file_uploader("Upload your Excel file (.xlsx)", type=["xlsx"])
 
 # Nombre del archivo de salida
-output_filename = st.text_input("Nombre del archivo de salida (sin .xlsx)", value="retention_result")
+output_filename = st.text_input("Output file name (without .xlsx)", value="retention_result")
 
 if uploaded_file and output_filename:
     # Leer Excel
