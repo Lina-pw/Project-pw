@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 import scipy.stats as stats
 from scipy.stats import zscore
 
-st.title("Calculadora de Retención Semanal")
+st.title("Calculate Retention Week")
 
 # Subida del archivo CSV
 uploaded_file = st.file_uploader("Sube tu archivo CSV (separado por ';')", type=["csv"])
