@@ -14,7 +14,7 @@ st.caption("🔁 The columns must be sorted from left to right, from the most re
 
 # Nombre del archivo de salida
 output_filename = st.text_input("Output file name (without .xlsx)", value="retention_result")
-st.caption(" This function calculates the number of accounts of column A (the most recent week) that are repeated in each of the other weeks. The result will be sorted from top to bottom, from the oldest to the most recent week.")
+st.caption(" 📊 This function calculates the number of accounts of column A (the most recent week) that are repeated in each of the other weeks. The result will be sorted from top to bottom, from the oldest to the most recent week.")
 if uploaded_file and output_filename:
     # Leer Excel
     df = pd.read_excel(uploaded_file)
