@@ -38,7 +38,7 @@ if uploaded_file and output_filename:
     df_invertido = df_retencion_corrigida.iloc[::-1].reset_index(drop=True)
 
     st.subheader("Resultado de retención calculada")
-    st.caption("📊 This function calculates the number of accounts of column A (the most recent week) that are repeated in each of the other weeks. The result will be sorted from top to bottom, from the oldest to the most recent week.")
+    st.caption(" This function calculates the number of accounts of column A (the most recent week) that are repeated in each of the other weeks. The result will be sorted from top to bottom, from the oldest to the most recent week.")
     st.dataframe(df_invertido)
 
     # Exportar como Excel
