@@ -6,48 +6,48 @@ from sklearn.preprocessing import StandardScaler
 import scipy.stats as stats
 from scipy.stats import zscore
 
-st.title("Calcule Retention UP Excel")
+st.title("Calculate Retention from Excel")
 
-# Subida del archivo Excel
+# Excel file upload
 uploaded_file = st.file_uploader("Upload your Excel file (.xlsx)", type=["xlsx"])
-st.caption("🔁 The columns must be sorted from left to right, from the most recent week to the oldest.")
+st.caption("🔁 The columns must be arranged from left to right, from the most recent week to the oldest.")
 
-# Nombre del archivo de salida
+# Output file name
 output_filename = st.text_input("Output file name (without .xlsx)", value="retention_result")
-st.caption(" 📊 This function calculates the number of accounts of column A (the most recent week) that are repeated in each of the other weeks. The result will be sorted from top to bottom, from the oldest to the most recent week.")
+st.caption(" 📊 This function calculates how many accounts from column A (the most recent week) are repeated in each of the other weeks. The result will be sorted from top to bottom, from the oldest to the most recent week.")
+
 if uploaded_file and output_filename:
-    # Leer Excel
+    # Read Excel
     df = pd.read_excel(uploaded_file)
     df_backup = df.copy()
 
-    st.subheader("Vista previa del archivo cargado")
+    st.subheader("Preview of uploaded file")
     st.dataframe(df.head())
 
-    # Usar la primera columna como semana base
-    columna_actual = df.columns[0]
-    cuentas_activas = set(df[columna_actual].dropna())
+    # Use the first column as the base week
+    current_column = df.columns[0]
+    active_accounts = set(df[current_column].dropna())
 
-    retencion_corrigida = {}
+    corrected_retention = {}
     for col in df.columns:
-        if col != columna_actual:
-            cuentas_anteriores = set(df[col].dropna())
-            retencion_corrigida[col] = len(cuentas_anteriores & cuentas_activas)
+        if col != current_column:
+            previous_accounts = set(df[col].dropna())
+            corrected_retention[col] = len(previous_accounts & active_accounts)
 
-    df_retencion_corrigida = pd.DataFrame(list(retencion_corrigida.items()),
-                                          columns=["Semana", "Cuentas Retenidas"])
-    df_invertido = df_retencion_corrigida.iloc[::-1].reset_index(drop=True)
+    df_corrected_retention = pd.DataFrame(list(corrected_retention.items()),
+                                          columns=["Week", "Retained Accounts"])
+    df_inverted = df_corrected_retention.iloc[::-1].reset_index(drop=True)
 
-    st.subheader("Resultado de retención calculada")
-    
-    st.dataframe(df_invertido)
+    st.subheader("Retention Calculation Result")
+    st.dataframe(df_inverted)
 
-    # Exportar como Excel
+    # Export to Excel
     output_path = f"{output_filename}.xlsx"
-    df_invertido.to_excel(output_path, index=False)
+    df_inverted.to_excel(output_path, index=False)
 
-    st.success(f"Archivo generado: {output_path}")
+    st.success(f"File generated: {output_path}")
     with open(output_path, "rb") as f:
-        st.download_button("Descargar archivo Excel",
+        st.download_button("Download Excel File",
                            data=f,
                            file_name=output_path,
                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
