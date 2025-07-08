@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 import scipy.stats as stats
 from scipy.stats import zscore
 
-st.title("Calculate Retention- UP Excel")
+st.title("Calculate Retention - UP Excel")
 
 # Excel file upload
 uploaded_file = st.file_uploader("Upload your Excel file (.xlsx)", type=["xlsx"])
